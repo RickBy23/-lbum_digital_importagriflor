@@ -14,18 +14,16 @@ function generarPaginas() {
         page.insertBefore(contraportada);
     }
 
-    // Inicializar Turn.js
     book.turn({
         width: 900,
         height: 600,
         autoCenter: true,
         display: 'double',
         duration: 1000,
-        acceleration: true,
-        elevation: 50,
         when: {
             turning: function(e, page) {
                 const total = $(this).turn('pages');
+                // Desactivar grosor en portada y contraportada
                 if (page === 1 || page === total) {
                     $('#album-viewport').removeClass('abierto');
                 } else {
@@ -74,7 +72,6 @@ function cerrarModal() { document.getElementById("modal").style.display = "none"
 function nextPage() { $('#book').turn('next'); }
 function prevPage() { $('#book').turn('previous'); }
 
-// Controles de teclado
 document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") cerrarModal();
     if (e.key === "ArrowLeft") prevPage();
