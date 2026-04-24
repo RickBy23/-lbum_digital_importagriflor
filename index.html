@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Álbum Corporativo - ImportAgriflor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="turn.min.js"></script>
+</head>
+<body>
+
+    <button class="nav prev" onclick="prevPage()">&#10094;</button>
+
+    <div id="book">
+        <div class="hard portada">
+            <div class="marco-portada">
+                <div class="cover-content">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4YEBSgS0YyGipL-gAF5oj4UaFIVhKCBfF2A&s" class="logo-portada">
+                    <h1 class="titulo-principal">INAUGURACIÓN</h1>
+                    <div class="linea-dorada"></div>
+                    <p class="subtitulo">Álbum Corporativo</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hard portada"></div>
+    </div>
+
+    <button class="nav next" onclick="nextPage()">&#10095;</button>
+
+    <div id="modal" class="modal">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <div class="modal-container">
+            <img id="modalImg">
+            <button id="downloadBtn">DESCARGAR EN HD</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
