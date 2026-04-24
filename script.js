@@ -9,10 +9,8 @@ function generarPaginas() {
     while (i < fotos.length) {
         const page = $('<div class="page"><div class="page-content"></div></div>');
         const content = page.find('.page-content');
-
         if (fotos[i]) { crearFoto(fotos[i], content, "top-left"); i++; }
         if (fotos[i]) { crearFoto(fotos[i], content, "bottom-right"); i++; }
-
         page.insertBefore(contraportada);
     }
 
@@ -25,7 +23,7 @@ function generarPaginas() {
         when: {
             turning: function(e, page) {
                 const total = $(this).turn('pages');
-
+                // Desactivar grosor en portada y contraportada
                 if (page === 1 || page === total) {
                     $('#album-viewport').removeClass('abierto');
                 } else {
@@ -39,7 +37,6 @@ function generarPaginas() {
 function crearFoto(nombre, container, posicion) {
     const cont = document.createElement("div");
     cont.className = "foto";
-
     const esVertical = verticales.includes(nombre);
     cont.style.width = esVertical ? "190px" : "270px";
     cont.style.height = esVertical ? "270px" : "190px";
@@ -53,15 +50,9 @@ function crearFoto(nombre, container, posicion) {
     }
 
     cont.style.transform = `rotate(${(Math.random() * 6) - 3}deg)`;
-
     const img = new Image();
     img.src = "images_low/" + nombre + ".jpg";
-
-    cont.onclick = function(e) {
-        e.stopPropagation();
-        abrirModal(nombre);
-    };
-
+    cont.onclick = function(e) { e.stopPropagation(); abrirModal(nombre); };
     cont.appendChild(img);
     container.append(cont);
 }
@@ -69,7 +60,6 @@ function crearFoto(nombre, container, posicion) {
 function abrirModal(nombre) {
     document.getElementById("modalImg").src = "images/" + nombre + ".jpg";
     document.getElementById("modal").style.display = "flex";
-
     document.getElementById("downloadBtn").onclick = function() {
         const a = document.createElement("a");
         a.href = "images/" + nombre + ".jpg";
@@ -78,10 +68,7 @@ function abrirModal(nombre) {
     };
 }
 
-function cerrarModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
+function cerrarModal() { document.getElementById("modal").style.display = "none"; }
 function nextPage() { $('#book').turn('next'); }
 function prevPage() { $('#book').turn('previous'); }
 
@@ -91,51 +78,50 @@ document.addEventListener("keydown", function(e) {
     if (e.key === "ArrowRight") nextPage();
 });
 
-/* =========================================
-   RESPONSIVE + MODO MÓVIL PRO
-========================================= */
-
+// --- FUNCIONALIDAD RESPONSIVE ---
 function ajustarResponsive() {
     const viewport = $('#album-viewport');
     const windowWidth = $(window).width();
     const windowHeight = $(window).height();
 
+    // Dimensiones originales de tu libro
     const bookWidth = 900;
     const bookHeight = 600;
 
+    // Calculamos la escala basada en el ancho y alto disponible
+    // Restamos 100px al ancho para dejar espacio a los botones laterales
+    // Restamos 60px al alto para dar un margen superior/inferior
     let scale = Math.min(
         (windowWidth - 100) / bookWidth,
         (windowHeight - 60) / bookHeight
     );
 
-    if (scale > 1) scale = 1;
+    // Evitamos que el álbum se haga más grande de su tamaño original
+    if (scale > 1) {
+        scale = 1;
+    }
 
+    // Aplicamos la escala al contenedor principal
     viewport.css({
         'transform': `scale(${scale})`,
         'transform-origin': 'center center'
     });
 
-    /* 🔥 CAMBIO INTELIGENTE SINGLE / DOUBLE */
-    const isMobile = windowWidth < 600;
-    const currentDisplay = $('#book').turn('display');
-
-    if (isMobile && currentDisplay !== 'single') {
+    // Cambiar a vista de una sola página en celulares
+    if (windowWidth < 600) {
         $('#book').turn('display', 'single');
-    } else if (!isMobile && currentDisplay !== 'double') {
+    } else {
         $('#book').turn('display', 'double');
     }
 }
 
-/* Eventos */
+// Escuchar los cambios de tamaño de la ventana
 $(window).resize(function() {
     ajustarResponsive();
 });
 
+// Inicializartodo al cargar la página
 $(document).ready(function() {
     generarPaginas();
-
-    // Esperar a que turn.js termine de montar
-    setTimeout(() => {
-        ajustarResponsive();
-    }, 100);
+    ajustarResponsive();
 });
