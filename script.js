@@ -14,14 +14,15 @@ function generarPaginas() {
         page.insertBefore(contraportada);
     }
 
-    // LÓGICA DE INICIO TURN.JS
+    // Inicializar Turn.js
     book.turn({
         width: 900,
         height: 600,
         autoCenter: true,
-        // Si la pantalla es pequeña, muestra de a una página
-        display: $(window).width() < 950 ? 'single' : 'double',
+        display: 'double',
         duration: 1000,
+        acceleration: true,
+        elevation: 50,
         when: {
             turning: function(e, page) {
                 const total = $(this).turn('pages');
@@ -35,15 +36,6 @@ function generarPaginas() {
     });
 }
 
-// Re-ajustar si el usuario gira el celular
-$(window).resize(function() {
-    if ($(window).width() < 950) {
-        $('#book').turn('display', 'single');
-    } else {
-        $('#book').turn('display', 'double');
-    }
-});
-
 function crearFoto(nombre, container, posicion) {
     const cont = document.createElement("div");
     cont.className = "foto";
@@ -52,12 +44,14 @@ function crearFoto(nombre, container, posicion) {
     cont.style.height = esVertical ? "270px" : "190px";
 
     if (posicion === "top-left") {
-        cont.style.left = "75px"; cont.style.top = "75px";
+        cont.style.left = "75px";
+        cont.style.top = "75px";
     } else {
-        cont.style.right = "75px"; cont.style.bottom = "75px";
+        cont.style.right = "75px";
+        cont.style.bottom = "75px";
     }
 
-    cont.style.transform = `rotate(${(Math.random() * 8) - 4}deg)`;
+    cont.style.transform = `rotate(${(Math.random() * 6) - 3}deg)`;
     const img = new Image();
     img.src = "images_low/" + nombre + ".jpg";
     cont.onclick = function(e) { e.stopPropagation(); abrirModal(nombre); };
@@ -80,6 +74,7 @@ function cerrarModal() { document.getElementById("modal").style.display = "none"
 function nextPage() { $('#book').turn('next'); }
 function prevPage() { $('#book').turn('previous'); }
 
+// Controles de teclado
 document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") cerrarModal();
     if (e.key === "ArrowLeft") prevPage();
