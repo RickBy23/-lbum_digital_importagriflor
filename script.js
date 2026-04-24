@@ -14,16 +14,17 @@ function generarPaginas() {
         page.insertBefore(contraportada);
     }
 
+    // LÓGICA DE INICIO TURN.JS
     book.turn({
         width: 900,
         height: 600,
         autoCenter: true,
-        display: 'double',
+        // Si la pantalla es pequeña, muestra de a una página
+        display: $(window).width() < 950 ? 'single' : 'double',
         duration: 1000,
         when: {
             turning: function(e, page) {
                 const total = $(this).turn('pages');
-                // Desactivar grosor en portada y contraportada
                 if (page === 1 || page === total) {
                     $('#album-viewport').removeClass('abierto');
                 } else {
@@ -34,6 +35,15 @@ function generarPaginas() {
     });
 }
 
+// Re-ajustar si el usuario gira el celular
+$(window).resize(function() {
+    if ($(window).width() < 950) {
+        $('#book').turn('display', 'single');
+    } else {
+        $('#book').turn('display', 'double');
+    }
+});
+
 function crearFoto(nombre, container, posicion) {
     const cont = document.createElement("div");
     cont.className = "foto";
@@ -42,14 +52,12 @@ function crearFoto(nombre, container, posicion) {
     cont.style.height = esVertical ? "270px" : "190px";
 
     if (posicion === "top-left") {
-        cont.style.left = "75px";
-        cont.style.top = "75px";
+        cont.style.left = "75px"; cont.style.top = "75px";
     } else {
-        cont.style.right = "75px";
-        cont.style.bottom = "75px";
+        cont.style.right = "75px"; cont.style.bottom = "75px";
     }
 
-    cont.style.transform = `rotate(${(Math.random() * 6) - 3}deg)`;
+    cont.style.transform = `rotate(${(Math.random() * 8) - 4}deg)`;
     const img = new Image();
     img.src = "images_low/" + nombre + ".jpg";
     cont.onclick = function(e) { e.stopPropagation(); abrirModal(nombre); };
