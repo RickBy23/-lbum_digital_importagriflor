@@ -78,4 +78,50 @@ document.addEventListener("keydown", function(e) {
     if (e.key === "ArrowRight") nextPage();
 });
 
-$(document).ready(generarPaginas);
+// --- FUNCIONALIDAD RESPONSIVE ---
+function ajustarResponsive() {
+    const viewport = $('#album-viewport');
+    const windowWidth = $(window).width();
+    const windowHeight = $(window).height();
+
+    // Dimensiones originales de tu libro
+    const bookWidth = 900;
+    const bookHeight = 600;
+
+    // Calculamos la escala basada en el ancho y alto disponible
+    // Restamos 100px al ancho para dejar espacio a los botones laterales
+    // Restamos 60px al alto para dar un margen superior/inferior
+    let scale = Math.min(
+        (windowWidth - 100) / bookWidth,
+        (windowHeight - 60) / bookHeight
+    );
+
+    // Evitamos que el álbum se haga más grande de su tamaño original
+    if (scale > 1) {
+        scale = 1;
+    }
+
+    // Aplicamos la escala al contenedor principal
+    viewport.css({
+        'transform': `scale(${scale})`,
+        'transform-origin': 'center center'
+    });
+
+    // Cambiar a vista de una sola página en celulares
+    if (windowWidth < 600) {
+        $('#book').turn('display', 'single');
+    } else {
+        $('#book').turn('display', 'double');
+    }
+}
+
+// Escuchar los cambios de tamaño de la ventana
+$(window).resize(function() {
+    ajustarResponsive();
+});
+
+// Inicializartodo al cargar la página
+$(document).ready(function() {
+    generarPaginas();
+    ajustarResponsive();
+});

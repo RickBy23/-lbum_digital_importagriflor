@@ -213,3 +213,47 @@ body {
 #downloadBtn:hover { background: #d4af37; transform: scale(1.05); }
 
 .close { position: absolute; top: 20px; right: 40px; color: white; font-size: 50px; cursor: pointer; }
+
+/* =========================================
+   MEDIA QUERIES PARA MÓVILES (RESPONSIVE)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* Achicamos los botones de navegación y los pegamos a los bordes */
+    .nav {
+        padding: 10px 15px;
+        font-size: 20px;
+    }
+    .prev { left: 5px; }
+    .next { right: 5px; }
+
+    /* Ajustes para que la portada no se sature de texto al encogerse */
+    .logo-portada {
+        width: 200px;
+        margin-bottom: 10px;
+    }
+    .titulo-principal {
+        font-size: 1.5rem;
+        letter-spacing: 4px;
+        margin: 10px 0;
+    }
+    .subtitulo {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    /* Ajustes para que el Modal de la imagen HD se vea bien en celular */
+    #modalImg {
+        max-height: 50vh; /* Que no ocupe toda la pantalla de alto */
+        border: 3px solid white;
+    }
+    .close {
+        top: 10px;
+        right: 20px;
+        font-size: 40px;
+    }
+    #downloadBtn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
