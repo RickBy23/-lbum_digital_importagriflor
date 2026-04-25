@@ -120,7 +120,6 @@ $(window).resize(function() {
     ajustarResponsive();
 });
 
-// Inicializartodo al cargar la página
 $(document).ready(function() {
     generarPaginas();
     ajustarResponsive();
