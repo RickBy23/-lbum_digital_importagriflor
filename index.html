@@ -4,44 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Álbum Corporativo - ImportAgriflor</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- TURN.JS (CDN para evitar errores) -->
     <script src="turn.min.js"></script>
-    <link rel="icon" href="https://importagriflor.com/wp-content/uploads/2025/05/cropped-Importagriflor-isotipo-32x32.jpg" sizes="32x32">
+
+    <link rel="icon" href="https://importagriflor.com/wp-content/uploads/2025/05/cropped-Importagriflor-isotipo-32x32.jpg">
 </head>
 <body>
 
-    <button class="nav prev" onclick="prevPage()">&#10094;</button>
+<button class="nav prev" onclick="prevPage()">&#10094;</button>
 
-    <div id="album-viewport">
-        <div id="book">
-            <div class="hard portada">
-                <div class="marco-portada">
-                    <div class="cover-content">
-                        <img src="https://importagriflor.com/wp-content/uploads/2025/05/cropped-cropped-Importagriflor-logo.png" class="logo-portada">
+<div id="album-viewport">
+    <div id="book">
 
-                        <h1 class="titulo-principal">GRAN APERTURA</h1>
-                        <div class="linea-dorada"></div>
-                        <p class="subtitulo">ÁLBUM DE FOTOS</p>
-                        <p class="subtitulo" style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">20-04-2026</p>
-                    </div>
+        <!-- PORTADA (LA TUYA, SIN CAMBIOS) -->
+        <div class="hard portada">
+            <div class="marco-portada">
+                <div class="cover-content">
+
+                    <img src="https://importagriflor.com/wp-content/uploads/2025/05/cropped-cropped-Importagriflor-logo.png" class="logo-portada">
+
+                    <h1 class="titulo-principal">GRAN APERTURA</h1>
+                    <div class="linea-dorada"></div>
+                    <p class="subtitulo">ÁLBUM DE FOTOS</p>
+                    <p class="subtitulo" style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">20-04-2026</p>
+
                 </div>
             </div>
-
-            <div class="hard portada"></div>
         </div>
+
+        <!-- CONTRAPORTADA -->
+        <div class="hard portada"></div>
+
     </div>
+</div>
 
-    <button class="nav next" onclick="nextPage()">&#10095;</button>
+<button class="nav next" onclick="nextPage()">&#10095;</button>
 
-    <div id="modal" class="modal">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <div class="modal-container">
-            <img id="modalImg">
-            <button id="downloadBtn">DESCARGAR EN HD</button>
-        </div>
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <span class="close" onclick="cerrarModal()">&times;</span>
+    <div class="modal-container">
+        <img id="modalImg">
+        <button id="downloadBtn">DESCARGAR EN HD</button>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
